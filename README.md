@@ -1,4 +1,4 @@
-hello-swarm
+swarm-examples
 ===========
 
 Run docker-compose templates on Swarm.
