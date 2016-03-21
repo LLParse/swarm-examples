@@ -1,0 +1,13 @@
+#
+# Linking containers implicitly defines strict host affinity, so
+# swarm will always schedule linked containers on the same host. 
+# The behavior is similar to Kubernetes pods.
+#
+zookeeper:
+  image: llparse/zk
+  command: bin/zkServer.sh start-foreground
+kafka:
+  image: llparse/kafka
+  command: bash -c "sed -ri 's/(zookeeper.connect)=.*/\1=zookeeper:2181/' config/server.properties && bin/kafka-server-start.sh config/server.properties"
+  links:
+    - zookeeper
